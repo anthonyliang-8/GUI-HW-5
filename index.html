@@ -10,15 +10,22 @@ Email: anthony_liang@student.uml.edu
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
+    <!--links for referencing google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <title>Scrabble</title>
   </head>
   <body>
     <div class="container" id="main-container">
       <h1 id="header">Scrabble</h1>
-      <div id="score"><p1>Current Score: 0</p1></div>
-      <div id="totalScore"><p1>Total Score: 0</p1></div>
+      <div id="score"><span>Score: 0</span></div>
+      <div id="totalScore"><span>Total Score: 0</span></div>
       <div id="holder">
-        <!-- rows and columns with different score tile types -->
+        <!-- rows to hold the single line scrabble game -->
         <div class="reg-score-tile" id="t1"></div>
         <div class="double-score-tile" id="t2"></div>
         <div class="reg-score-tile" id="t3"></div>
@@ -31,6 +38,7 @@ Email: anthony_liang@student.uml.edu
       <button id="next-set-btn" type="button">Next Set</button>
       <button id="restart-game-btn" type="button">Restart Game</button>
     </div>
+    <!--scripts for jQuery CDN and my own javascript file-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>

@@ -205,12 +205,12 @@ doubleScoreTiles.forEach((tile) => {
   tile.addEventListener("dragover", droppableTile);
 });
 
-// gives the player a new hand of scrabble tiles
+// gives the player a new set of scrabble tiles
 function newGame() {
-  // loop to create 7 new scrabble tiles for the player's hand
-  for (col = 0; col < 7; col++) {
+  // loop to create 7 new scrabble tiles for the player's set
+  for (set = 0; set < 7; set++) {
     // generate a unique ID for each tile div
-    var divName = "temp" + col;
+    var divName = "temp" + set;
 
     // randomly select a scrabble letter for the current tile
     var currentRandomLetter = randomize();
@@ -267,7 +267,7 @@ function updateScore() {
   $("#score").html("Score: " + score);
 }
 
-// clears the hand and board of current tiles and sets new ones for the next round
+// clears the set and board of current tiles and sets new ones for the next round
 function nextSet() {
   // add the current score to the total score
   totalScore += score;
@@ -278,28 +278,28 @@ function nextSet() {
   $("#score").html("Score: " + score);
   $("#totalScore").html("Total Score: " + totalScore);
 
-  // loop through and remove the current set of tiles from the board and hand
+  // loop through and remove the current set of tiles from the board and set
   for (let tileIndex = 1; tileIndex < 8; tileIndex++) {
-    const currentTileId = "tile" + tileIndex + " > *";
-    const currentHandId = "temp" + (tileIndex - 1);
+    const currentTile = "tile" + tileIndex + " > *";
+    const currentSet = "temp" + (tileIndex - 1);
 
-    $("#" + currentTileId).remove();
-    $("#" + currentHandId).remove();
+    $("#" + currentTile).remove();
+    $("#" + currentSet).remove();
   }
 
-  // generate a new set of tiles for the player's hand
+  // generate a new set of tiles for the player's set
   newGame();
 }
 
-// restarts the game by clearing the board and hand, and resetting scores
+// restarts the game by clearing the board and set, and resetting scores
 function restart() {
-  // loop through and remove the current set of tiles from the board and hand
+  // loop through and remove the current set of tiles from the board and set
   for (let i = 1; i < 8; i++) {
-    const currentHandName = "temp" + (i - 1);
-    const currentTileName = "tile" + i + " > *";
+    const currentSet = "temp" + (i - 1);
+    const currentTile = "tile" + i + " > *";
 
-    $("#" + currentTileName).remove();
-    $("#" + currentHandName).remove();
+    $("#" + currentTile).remove();
+    $("#" + currentSet).remove();
   }
 
   // reset total score and current score
@@ -310,7 +310,7 @@ function restart() {
   $("#score").html("Score: " + score);
   $("#totalScore").html("Total Score: " + totalScore);
 
-  // generate a new set of tiles for the player's hand
+  // generate a new set of tiles for the player's set
   newGame();
 }
 
@@ -336,7 +336,7 @@ function dragFunc(e) {
   e.dataTransfer.setData("text", e.target.id);
 }
 
-// handles the drop event, checks if the target is a scrabble tile, prevents default behavior, appends the dragged element, and updates the score
+// setles the drop event, checks if the target is a scrabble tile, prevents default behavior, appends the dragged element, and updates the score
 function dropFunc(e) {
   // checks if the target is a scrabble tile, and if so, returns early to prevent further execution
   if (e.target.classList[0] == "scrabble-tile") return;

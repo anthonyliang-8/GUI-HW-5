@@ -6,6 +6,10 @@ Email: anthony_liang@student.uml.edu
 
 /* main container to hold everything */
 
+* {
+  font-family: "Roboto", sans-serif;
+}
+
 #main-container {
   display: flex;
   flex-direction: column;
@@ -20,7 +24,6 @@ Email: anthony_liang@student.uml.edu
 /* display user tiles as flex row to make it a row 
   uses the tile holder as background for the div
 */
-
 #user-tiles {
   display: flex;
   flex-direction: row;
@@ -35,13 +38,14 @@ Email: anthony_liang@student.uml.edu
   background-repeat: no-repeat;
   background-position: center center;
 }
+/* styling for the regular 1 point tiles */
 .reg-score-tile {
   background-image: url(../assets/game_tiles/blank_space_tile.png);
   width: 80px;
   height: 85px;
   border-width: 1px;
 }
-
+/* styling for the double points tiles */
 .double-score-tile {
   background-image: url(../assets/game_tiles/double_score_tile.png);
   width: 80px;
