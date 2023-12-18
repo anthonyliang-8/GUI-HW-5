@@ -4,10 +4,7 @@ Date: 12/17/2023
 Email: anthony_liang@student.uml.edu
 */
 
-#board {
-  display: flex;
-  flex-direction: row;
-}
+/* main container to hold everything */
 
 #main-container {
   display: flex;
@@ -15,6 +12,15 @@ Email: anthony_liang@student.uml.edu
   justify-content: center;
   align-items: center;
 }
+
+#board {
+  display: flex;
+  flex-direction: row;
+}
+/* display user tiles as flex row to make it a row 
+  uses the tile holder as background for the div
+*/
+
 #user-tiles {
   display: flex;
   flex-direction: row;
@@ -24,20 +30,20 @@ Email: anthony_liang@student.uml.edu
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  background-image: url("/assets/misc/scrabble-tile-holder-406774_640.png");
+  background-image: url("../assets/misc/scrabble-tile-holder-406774_640.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
 }
 .reg-score-tile {
-  background-image: url(/assets/game_tiles/blank_space_tile.png);
+  background-image: url(../assets/game_tiles/blank_space_tile.png);
   width: 80px;
   height: 85px;
   border-width: 1px;
 }
 
 .double-score-tile {
-  background-image: url(/assets/game_tiles/double_score_tile.png);
+  background-image: url(../assets/game_tiles/double_score_tile.png);
   width: 80px;
   height: 85px;
   border-width: 1px;

@@ -13,6 +13,14 @@ var ScrabbleTiles = [];
 var score = 0;
 var totalScore = 0;
 
+/*  File:  /~heines/91.461/91.461-2015-16f/461-assn/Scrabble_Pieces_AssociativeArray_Jesse.js
+ *  Jesse M. Heines, UMass Lowell Computer Science, heines@cs.uml.edu
+ *  Copyright (c) 2015 by Jesse M. Heines.  All rights reserved.  May be freely
+ *    copied or excerpted for educational purposes with credit to the author.
+ *  updated by JMH on November 21, 2015 at 10:27 AM
+ *  updated by JMH on November 25, 2015 at 10:58 AM to add the blank tile
+ *  updated by JMH on November 27, 2015 at 10:22 AM to add original-distribution
+ */
 ScrabbleTiles["A"] = {
   value: 1,
   "original-distribution": 9,
@@ -213,7 +221,8 @@ function newGame() {
     // get the URL of the tile image for the selected scrabble letter
     var tileDraggable = ScrabbleTiles[currentRandomLetter]["tile"];
 
-    // create a new div element representing the scrabble tile
+    // create a new div element representing each scrabble tile
+    // makes each tile have unique attributes
     // https://stackoverflow.com/questions/867916/creating-a-div-element-in-jquery
     var newSlot = $(
       '<div class="scrabble-tile" id="' +
@@ -241,6 +250,7 @@ function updateScore() {
   for (i = 1; i < 8; i++) {
     // format string for jQuery selector
     tileName = "t";
+    // concatenate 'i' with " > *" to form unique selector pattern
     tileName = tileName + i + " > *";
     currentValue = $("#" + tileName).data("value");
     if (isNaN(currentValue) == false) {
@@ -285,7 +295,7 @@ function nextSet() {
 function restart() {
   // loop through and remove the current set of tiles from the board and hand
   for (let i = 1; i < 8; i++) {
-    const currentHandName = "hand" + (i - 1);
+    const currentHandName = "temp" + (i - 1);
     const currentTileName = "tile" + i + " > *";
 
     $("#" + currentTileName).remove();
@@ -305,7 +315,7 @@ function restart() {
 }
 
 // https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/
-// ranomize what letters are generated using fisher yatles
+// ranomize what letters are generated using fisher yates algorithm
 function randomize() {
   const alphabet = "ABCDEFGHIJKLMNOPQURTUVWXYZ_";
 
