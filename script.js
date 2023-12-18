@@ -224,7 +224,7 @@ function newGame() {
     // create a new div element representing each scrabble tile
     // makes each tile have unique attributes
     // https://stackoverflow.com/questions/867916/creating-a-div-element-in-jquery
-    var newSlot = $(
+    var newVar = $(
       '<div class="scrabble-tile" id="' +
         divName +
         '" draggable="true" droppable="false" ondragstart="dragFunc(event)" "' +
@@ -234,12 +234,12 @@ function newGame() {
     );
 
     // set custom attributes on the new tile div to store data
-    newSlot.attr("data-letterName", currentRandomLetter);
-    newSlot.attr("data-value", value);
-    newSlot.attr("data-tile", tileDraggable);
+    newVar.attr("data-letterName", currentRandomLetter);
+    newVar.attr("data-value", value);
+    newVar.attr("data-tile", tileDraggable);
 
     // append the new tile element to the user-tiles container
-    $("#user-tiles").append(newSlot);
+    $("#user-tiles").append(newVar);
   }
 }
 
