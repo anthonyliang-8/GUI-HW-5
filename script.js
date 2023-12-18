@@ -234,16 +234,17 @@ function newGame() {
   }
 }
 
-//set score of current word
+// sets the score of the current word based on the tiles on the board
 function updateScore() {
   score = 0;
-  // loop through the reg-space-tiles
+  // loop through the regular space tiles
   for (i = 1; i < 8; i++) {
-    //format string for jquery selector
+    // format string for jQuery selector
     tileName = "t";
     tileName = tileName + i + " > *";
     currentValue = $("#" + tileName).data("value");
     if (isNaN(currentValue) == false) {
+      // check if the tile is on a double-score space
       if ($("#t" + i).attr("class") == "double-score-tile")
         score = score + currentValue * 2;
       else score = score + currentValue;
@@ -252,16 +253,22 @@ function updateScore() {
     }
   }
 
+  // display the updated score on the page
   $("#score").html("Score: " + score);
 }
 
-//clears the hand and board of current tiles and sets new ones
+// clears the hand and board of current tiles and sets new ones for the next round
 function nextSet() {
+  // add the current score to the total score
   totalScore += score;
+  // reset the score for the next round
   score = 0;
+
+  // update the score display on the page
   $("#score").html("Score: " + score);
   $("#totalScore").html("Total Score: " + totalScore);
 
+  // loop through and remove the current set of tiles from the board and hand
   for (let tileIndex = 1; tileIndex < 8; tileIndex++) {
     const currentTileId = "tile" + tileIndex + " > *";
     const currentHandId = "temp" + (tileIndex - 1);
@@ -270,11 +277,13 @@ function nextSet() {
     $("#" + currentHandId).remove();
   }
 
+  // generate a new set of tiles for the player's hand
   newGame();
 }
 
-// Function to restart the game
+// restarts the game by clearing the board and hand, and resetting scores
 function restart() {
+  // loop through and remove the current set of tiles from the board and hand
   for (let i = 1; i < 8; i++) {
     const currentHandName = "hand" + (i - 1);
     const currentTileName = "tile" + i + " > *";
@@ -282,10 +291,16 @@ function restart() {
     $("#" + currentTileName).remove();
     $("#" + currentHandName).remove();
   }
+
+  // reset total score and current score
   totalScore = 0;
   score = 0;
+
+  // update the score display on the page
   $("#score").html("Score: " + score);
   $("#totalScore").html("Total Score: " + totalScore);
+
+  // generate a new set of tiles for the player's hand
   newGame();
 }
 
@@ -301,18 +316,30 @@ function randomize() {
 
   return alphabet[Math.floor(Math.random() * alphabet.length)];
 }
+// prevents the default behavior of the event, allowing a draggable element to be dropped
 function droppableTile(e) {
   e.preventDefault();
 }
 
+// sets the data to be transferred during drag-and-drop, storing the ID of the dragged element
 function dragFunc(e) {
   e.dataTransfer.setData("text", e.target.id);
 }
 
+// handles the drop event, checks if the target is a scrabble tile, prevents default behavior, appends the dragged element, and updates the score
 function dropFunc(e) {
+  // checks if the target is a scrabble tile, and if so, returns early to prevent further execution
   if (e.target.classList[0] == "scrabble-tile") return;
+
+  // prevents the default behavior of the drop event
   e.preventDefault();
+
+  // retrieves the ID of the dragged element
   var data = e.dataTransfer.getData("text");
+
+  // appends the dragged element to the drop target
   e.target.appendChild(document.getElementById(data));
+
+  // updates the score based on the current state of the tiles on the board
   updateScore();
 }
