@@ -1,0 +1,38 @@
+#board {
+  display: flex;
+  flex-direction: row;
+}
+
+#gameWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#user-tiles {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5em;
+  width: 700px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-image: url("/assets/misc/scrabble-tile-holder-406774_640.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.reg-score-tile {
+  background-image: url(/assets/game_tiles/blank_space_tile.png);
+  width: 80px;
+  height: 85px;
+  border-width: 1px;
+}
+
+.double-score-tile {
+  background-image: url(/assets/game_tiles/double_score_tile.png);
+  width: 80px;
+  height: 85px;
+  border-width: 1px;
+}

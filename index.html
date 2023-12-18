@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Scrabble</title>
+  </head>
+  <body>
+    <div class="container" id="gameWrapper">
+      <div class="text-center mt-5" id="wrapper">
+        <h1 id="title">Scrabble</h1>
+      </div>
+      <div id="score"><p1>Current Score: 0</p1></div>
+      <div id="totalScore"><p1>Total Score: 0</p1></div>
+      <div id="board">
+        <div class="reg-score-tile" id="s1" row="0" col="0"></div>
+        <div class="double-score-tile" id="s2" row="0" col="1"></div>
+        <div class="reg-score-tile" id="s3" row="0" col="2"></div>
+        <div class="reg-score-tile" id="s4" row="0" col="3"></div>
+        <div class="reg-score-tile" id="s5" row="0" col="4"></div>
+
+        <div class="double-score-tile" id="s6" row="0" col="5"></div>
+        <div class="reg-score-tile" id="s7" row="0" col="6"></div>
+      </div>
+      <div id="user-tiles"></div>
+      <button id="next-set-btn" type="button">Next Set</button>
+      <button id="restart-game-btn" type="button">Restart Game</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
