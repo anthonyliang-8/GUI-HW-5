@@ -8,6 +8,7 @@ Email: anthony_liang@student.uml.edu
 
 * {
   font-family: "Roboto", sans-serif;
+  background-color: burlywood;
 }
 
 #main-container {
@@ -44,6 +45,7 @@ Email: anthony_liang@student.uml.edu
   width: 80px;
   height: 85px;
   border-width: 1px;
+  box-shadow: 10px 10px 20px lightgreen;
 }
 /* styling for the double points tiles */
 .double-score-tile {
@@ -51,4 +53,15 @@ Email: anthony_liang@student.uml.edu
   width: 80px;
   height: 85px;
   border-width: 1px;
+  box-shadow: 10px 10px 20px red;
+}
+
+#next-set-btn,
+#restart-game-btn {
+  border-radius: 6px;
+  border: 1px solid black;
+  margin-top: 1em;
+  width: 100px;
+  height: 30px;
+  box-shadow: 7px 5px 15px black;
 }

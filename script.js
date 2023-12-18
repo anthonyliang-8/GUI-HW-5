@@ -207,6 +207,9 @@ doubleScoreTiles.forEach((tile) => {
 
 // gives the player a new set of scrabble tiles
 function newGame() {
+  // clear existing event listeners for user-tiles
+  $("#user-tiles").off("dragover drop");
+
   // loop to create 7 new scrabble tiles for the player's set
   for (set = 0; set < 7; set++) {
     // generate a unique ID for each tile div
@@ -222,8 +225,7 @@ function newGame() {
     var tileDraggable = ScrabbleTiles[currentRandomLetter]["tile"];
 
     // create a new div element representing each scrabble tile
-    // makes each tile have unique attributes
-    // https://stackoverflow.com/questions/867916/creating-a-div-element-in-jquery
+    // https://www.tutorialrepublic.com/faq/how-to-create-a-div-element-in-jquery.php
     var newVar = $(
       '<div class="scrabble-tile" id="' +
         divName +
@@ -241,6 +243,18 @@ function newGame() {
     // append the new tile element to the user-tiles container
     $("#user-tiles").append(newVar);
   }
+
+  // add the droppable event listeners for the user-tiles container
+  $("#user-tiles").on("dragover", droppableTile);
+  $("#user-tiles").on("drop", function (e) {
+    e.preventDefault();
+    // pass data from tile to the droppable div holder
+    // https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData
+    var data = e.originalEvent.dataTransfer.getData("text");
+    // append the dragged tile back to the user-tiles container
+    $("#user-tiles").append(document.getElementById(data));
+    updateScore();
+  });
 }
 
 // sets the score of the current word based on the tiles on the board
@@ -298,6 +312,7 @@ function restart() {
     const currentSet = "temp" + (i - 1);
     const currentTile = "tile" + i + " > *";
 
+    // removes tiles off board
     $("#" + currentTile).remove();
     $("#" + currentSet).remove();
   }
