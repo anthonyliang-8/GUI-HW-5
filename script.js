@@ -205,6 +205,34 @@ doubleScoreTiles.forEach((tile) => {
   tile.addEventListener("dragover", droppableTile);
 });
 
+// prevents the default behavior of the event, allowing a draggable element to be dropped
+function droppableTile(e) {
+  e.preventDefault();
+}
+
+// sets the data to be transferred during drag-and-drop, storing the ID of the dragged element
+function dragFunc(e) {
+  e.dataTransfer.setData("text", e.target.id);
+}
+
+// setles the drop event, checks if the target is a scrabble tile, prevents default behavior, appends the dragged element, and updates the score
+function dropFunc(e) {
+  // checks if the target is a scrabble tile, and if so, returns early to prevent further execution
+  if (e.target.classList[0] == "scrabble-tile") return;
+
+  // prevents the default behavior of the drop event
+  e.preventDefault();
+
+  // retrieves the ID of the dragged element
+  var data = e.dataTransfer.getData("text");
+
+  // appends the dragged element to the drop target
+  e.target.appendChild(document.getElementById(data));
+
+  // updates the score based on the current state of the tiles on the board
+  updateScore();
+}
+
 // gives the player a new set of scrabble tiles
 function newGame() {
   // clear existing event listeners for user-tiles
@@ -340,31 +368,4 @@ function randomize() {
   }
 
   return alphabet[Math.floor(Math.random() * alphabet.length)];
-}
-// prevents the default behavior of the event, allowing a draggable element to be dropped
-function droppableTile(e) {
-  e.preventDefault();
-}
-
-// sets the data to be transferred during drag-and-drop, storing the ID of the dragged element
-function dragFunc(e) {
-  e.dataTransfer.setData("text", e.target.id);
-}
-
-// setles the drop event, checks if the target is a scrabble tile, prevents default behavior, appends the dragged element, and updates the score
-function dropFunc(e) {
-  // checks if the target is a scrabble tile, and if so, returns early to prevent further execution
-  if (e.target.classList[0] == "scrabble-tile") return;
-
-  // prevents the default behavior of the drop event
-  e.preventDefault();
-
-  // retrieves the ID of the dragged element
-  var data = e.dataTransfer.getData("text");
-
-  // appends the dragged element to the drop target
-  e.target.appendChild(document.getElementById(data));
-
-  // updates the score based on the current state of the tiles on the board
-  updateScore();
 }
