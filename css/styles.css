@@ -13,7 +13,7 @@ Email: anthony_liang@student.uml.edu
   align-items: center;
 }
 
-#board {
+#holder {
   display: flex;
   flex-direction: row;
 }
