@@ -1,3 +1,9 @@
+/*
+Name: Anthony Liang
+Date: 12/17/2023
+Email: anthony_liang@student.uml.edu
+*/
+
 const nextSetBtn = document.getElementById("next-set-btn");
 const restartGameBtn = document.getElementById("restart-game-btn");
 const regScoreTiles = document.querySelectorAll(".reg-score-tile");
@@ -193,14 +199,10 @@ doubleScoreTiles.forEach((tile) => {
 
 // gives the player a new hand of scrabble tiles
 function newGame() {
-  // variables to store the current row and column for each letter div
-  var row = 0;
-  var col = 0;
-
   // loop to create 7 new scrabble tiles for the player's hand
   for (col = 0; col < 7; col++) {
     // generate a unique ID for each tile div
-    var divName = "p" + col;
+    var divName = "temp" + col;
 
     // randomly select a scrabble letter for the current tile
     var currentRandomLetter = randomize();
@@ -216,10 +218,7 @@ function newGame() {
     var newSlot = $(
       '<div class="scrabble-tile" id="' +
         divName +
-        '" draggable="true" droppable="false" ondragstart="dragFunc(event)" row="' +
-        row +
-        '" col="' +
-        col +
+        '" draggable="true" droppable="false" ondragstart="dragFunc(event)" "' +
         '" style="background-image: url(' +
         tileDraggable +
         '); background-size: 80px 85px; width: 80px; height: 85px; border-width: 1px;"/>'
@@ -241,11 +240,11 @@ function updateScore() {
   // loop through the reg-space-tiles
   for (i = 1; i < 8; i++) {
     //format string for jquery selector
-    tileName = "s";
+    tileName = "t";
     tileName = tileName + i + " > *";
     currentValue = $("#" + tileName).data("value");
     if (isNaN(currentValue) == false) {
-      if ($("#s" + i).attr("class") == "double-score-tile")
+      if ($("#t" + i).attr("class") == "double-score-tile")
         score = score + currentValue * 2;
       else score = score + currentValue;
     } else {
@@ -258,53 +257,36 @@ function updateScore() {
 
 //clears the hand and board of current tiles and sets new ones
 function nextSet() {
-  totalScore = totalScore + score;
+  totalScore += score;
   score = 0;
   $("#score").html("Score: " + score);
   $("#totalScore").html("Total Score: " + totalScore);
 
-  for (i = 1; i < 8; i++) {
-    handName = "p";
-    handName = handName + (i - 1);
-    tileName = "s";
-    tileName = tileName + i + " > *";
-    $("#" + tileName).remove();
-    $("#" + handName).remove();
+  for (let tileIndex = 1; tileIndex < 8; tileIndex++) {
+    const currentTileId = "tile" + tileIndex + " > *";
+    const currentHandId = "temp" + (tileIndex - 1);
+
+    $("#" + currentTileId).remove();
+    $("#" + currentHandId).remove();
   }
+
   newGame();
 }
 
-function droppableTile(e) {
-  e.preventDefault();
-}
-
-//restarts game
+// Function to restart the game
 function restart() {
-  for (i = 1; i < 8; i++) {
-    handName = "p";
-    handName = handName + (i - 1);
-    tileName = "s";
-    tileName = tileName + i + " > *";
-    $("#" + tileName).remove();
-    $("#" + handName).remove();
+  for (let i = 1; i < 8; i++) {
+    const currentHandName = "hand" + (i - 1);
+    const currentTileName = "tile" + i + " > *";
+
+    $("#" + currentTileName).remove();
+    $("#" + currentHandName).remove();
   }
   totalScore = 0;
   score = 0;
   $("#score").html("Score: " + score);
   $("#totalScore").html("Total Score: " + totalScore);
   newGame();
-}
-
-function dragFunc(e) {
-  e.dataTransfer.setData("text", e.target.id);
-}
-
-function dropFunc(e) {
-  if (e.target.classList[0] == "scrabble-tile") return;
-  e.preventDefault();
-  var data = e.dataTransfer.getData("text");
-  e.target.appendChild(document.getElementById(data));
-  updateScore();
 }
 
 // https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/
@@ -318,4 +300,19 @@ function randomize() {
   }
 
   return alphabet[Math.floor(Math.random() * alphabet.length)];
+}
+function droppableTile(e) {
+  e.preventDefault();
+}
+
+function dragFunc(e) {
+  e.dataTransfer.setData("text", e.target.id);
+}
+
+function dropFunc(e) {
+  if (e.target.classList[0] == "scrabble-tile") return;
+  e.preventDefault();
+  var data = e.dataTransfer.getData("text");
+  e.target.appendChild(document.getElementById(data));
+  updateScore();
 }

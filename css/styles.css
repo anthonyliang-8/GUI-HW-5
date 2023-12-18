@@ -1,9 +1,15 @@
+/*
+Name: Anthony Liang
+Date: 12/17/2023
+Email: anthony_liang@student.uml.edu
+*/
+
 #board {
   display: flex;
   flex-direction: row;
 }
 
-#gameWrapper {
+#main-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
